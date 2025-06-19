@@ -1,0 +1,9 @@
+{
+  "name": "handle-login-submission",
+  "version": "1.0.0",
+  "description": "Frontend component to handle login form submission",
+  "main": "LoginForm.js",
+  "dependencies": {
+    "react": "^18.2.0"
+  }
+} 
