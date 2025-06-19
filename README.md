@@ -1,1 +1,14 @@
-# UserStory4
+### 📝 Story: Handle Login Submission
+
+**Title:** Handle Login Submission
+
+**Description:**  
+As a user, I want to submit my credentials, so that the system can validate them and log me in.
+
+**Acceptance Criteria:**
+- Clicking the login button triggers a request to the backend
+- Display loading state during request
+- On success:
+  - Redirect to dashboard
+- On failure:
+  - Show relevant error message
