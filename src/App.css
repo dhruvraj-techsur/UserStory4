@@ -1,0 +1,19 @@
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+}
+
+[data-theme='dark'] {
+  --bg: #1e1e1e;
+  --text: #ffffff;
+}
+
+body, .App {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
