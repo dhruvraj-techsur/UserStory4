@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(''), 3000);
+    }
+  }, [error]);
+
+  const loginUser = async (email, password) => {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    return response;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,21 +32,12 @@ export default function LoginForm() {
     setError('');
 
     try {
-      // Simulate API call to backend
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await loginUser(email, password);
 
       if (response.ok) {
         const data = await response.json();
-        // Store token
         localStorage.setItem('authToken', data.token);
-        // Redirect to dashboard on success
-        window.location.href = '/dashboard';
+        history.push('/dashboard');
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Login failed');
@@ -39,10 +50,10 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} disabled={loading}>
       <h2>Login</h2>
       
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+      {error && <div style={{ color: 'red', marginBottom: '10px' }} aria-live="polite">{error}</div>}
       
       <div>
         <input
@@ -71,4 +82,4 @@ export default function LoginForm() {
       </button>
     </form>
   );
-} 
+}
