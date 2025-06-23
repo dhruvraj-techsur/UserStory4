@@ -1,7 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+
+async function loginUser(credentials) {
+  return fetch('/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  }).then(data => data.json())
+}
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -10,32 +19,32 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const history = useHistory();
 
-  useEffect(() => {
-    if (error) {
-      // Display error message
-    }
-    if (localStorage.getItem('authToken')) {
-      history.push('/dashboard');
-    }
-  }, [error, history]);
-
-  const loginUser = async (email, password) => {
-    try {
-      const response = await axios.post('/api/login', { email, password });
-      localStorage.setItem('authToken', response.data.token);
-    } catch (err) {
-      setError(err.response.data.message || 'Login failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    loginUser(email, password);
-  };
+
+    try {
+      const response = await loginUser({ email, password });
+
+      if (response.token) {
+        localStorage.setItem('authToken', response.token);
+        history.push('/dashboard');
+      } else {
+        setError(response.message || 'Login failed');
+      }
+    } catch (err) {
+      setError('Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [email, password, history]);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => setError(''), 3000);
+    }
+  }, [error]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -66,7 +75,7 @@ export default function LoginForm() {
       </div>
       
       <button type="submit" disabled={loading}>
-        {loading ? <span>Loading...</span> : 'Login'}
+        {loading ? <Spinner /> : 'Login'}
       </button>
     </form>
   );
