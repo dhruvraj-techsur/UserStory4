@@ -14,7 +14,7 @@ body, .App {
   transition: all 0.3s ease;
   min-height: 100vh;
   margin: 0;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem 2rem; /* Adjusted padding */
   font-family: Arial, sans-serif;
 }
 
@@ -22,22 +22,12 @@ button {
   background-color: var(--text);
   color: var(--bg);
   border: none;
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
   transition: all 0.3s ease;
 }
 
 button:hover {
   background-color: var(--bg);
   color: var(--text);
-}
-
-@media (max-width: 600px) {
-  button {
-    position: static;
-    margin: 20px auto;
-    display: block;
-  }
 }
