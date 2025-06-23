@@ -8,13 +8,7 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const history = useHistory();
 
-  useEffect(() => {
-    if (error) {
-      // Handle side effects of setting error message here
-    }
-  }, [error]);
-
-  const loginUser = async (email, password) => {
+  const loginUser = async () => {
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -25,34 +19,34 @@ export default function LoginForm() {
     return response;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await loginUser(email, password);
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('authToken', data.token);
-        history.push('/dashboard');
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
+  useEffect(() => {
+    const submitForm = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const response = await loginUser();
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('authToken', data.token);
+          history.push('/dashboard');
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message || 'Login failed');
+        }
+      } catch (err) {
+        setError('Network error. Please try again.');
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError('Network error. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+    submitForm();
+  }, [email, password]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => e.preventDefault()} disabled={loading}>
       <h2>Login</h2>
       
-      {error && <div className="error-message">{error}</div>}
+      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       
       <div>
         <input
@@ -62,7 +56,6 @@ export default function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={loading}
-          aria-label="Email"
         />
       </div>
       
@@ -74,7 +67,6 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={loading}
-          aria-label="Password"
         />
       </div>
       
