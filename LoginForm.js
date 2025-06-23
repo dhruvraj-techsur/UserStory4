@@ -1,16 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
-async function loginUser(credentials) {
-  return fetch('/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  }).then(data => data.json())
-}
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -19,38 +8,51 @@ export default function LoginForm() {
   const [error, setError] = useState('');
   const history = useHistory();
 
-  const handleSubmit = useCallback(async (e) => {
+  useEffect(() => {
+    if (error) {
+      // Handle side effects of setting error message here
+    }
+  }, [error]);
+
+  const loginUser = async (email, password) => {
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    return response;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await loginUser({ email, password });
+      const response = await loginUser(email, password);
 
-      if (response.token) {
-        localStorage.setItem('authToken', response.token);
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('authToken', data.token);
         history.push('/dashboard');
       } else {
-        setError(response.message || 'Login failed');
+        const errorData = await response.json();
+        setError(errorData.message || 'Login failed');
       }
     } catch (err) {
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
-  }, [email, password, history]);
-
-  useEffect(() => {
-    if (error) {
-      setTimeout(() => setError(''), 3000);
-    }
-  }, [error]);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
       
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
+      {error && <div className="error-message">{error}</div>}
       
       <div>
         <input
@@ -60,6 +62,7 @@ export default function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={loading}
+          aria-label="Email"
         />
       </div>
       
@@ -71,17 +74,13 @@ export default function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           disabled={loading}
+          aria-label="Password"
         />
       </div>
       
       <button type="submit" disabled={loading}>
-        {loading ? <Spinner /> : 'Login'}
+        {loading ? 'Logging in...' : 'Login'}
       </button>
     </form>
   );
 }
-
-LoginForm.propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-};
