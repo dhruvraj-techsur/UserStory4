@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import './ThemeToggle.css';
+import PropTypes from 'prop-types';
+import styles from './ThemeToggle.module.css';
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = typeof window.localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
-    return savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const localTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return localTheme || (systemPrefersDark ? 'dark' : 'light');
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    if (typeof window.localStorage !== 'undefined') {
-      localStorage.setItem('theme', theme);
-    }
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -19,10 +22,19 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button onClick={toggleTheme} className="theme-toggle" role="switch">
-      {theme === 'light' ? 'Activate Dark Mode' : 'Activate Light Mode'}
+    <button 
+      onClick={toggleTheme} 
+      className={styles.toggleButton}
+      aria-label="Toggle dark and light mode"
+    >
+      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
     </button>
   );
+};
+
+ThemeToggle.propTypes = {
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 };
 
 export default ThemeToggle;
