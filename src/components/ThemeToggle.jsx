@@ -5,15 +5,12 @@ import styles from './ThemeToggle.module.css';
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(() => {
     const localTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return localTheme || (systemPrefersDark ? 'dark' : 'light');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return localTheme || systemTheme || 'light';
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -24,8 +21,8 @@ const ThemeToggle = () => {
   return (
     <button 
       onClick={toggleTheme} 
-      className={styles.toggleButton}
-      aria-label="Toggle dark and light mode"
+      className={styles.toggleButton} 
+      aria-label="Switch theme"
     >
       Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
     </button>
