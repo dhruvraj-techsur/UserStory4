@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -10,50 +12,36 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (error) {
-      setTimeout(() => setError(''), 3000);
+      // Display error message
     }
-  }, [error]);
+    if (localStorage.getItem('authToken')) {
+      history.push('/dashboard');
+    }
+  }, [error, history]);
 
   const loginUser = async (email, password) => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    return response;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-
     try {
-      const response = await loginUser(email, password);
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('authToken', data.token);
-        history.push('/dashboard');
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
-      }
+      const response = await axios.post('/api/login', { email, password });
+      localStorage.setItem('authToken', response.data.token);
     } catch (err) {
-      setError('Network error. Please try again.');
+      setError(err.response.data.message || 'Login failed');
     } finally {
       setLoading(false);
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    loginUser(email, password);
+  };
+
   return (
-    <form onSubmit={handleSubmit} disabled={loading}>
+    <form onSubmit={handleSubmit}>
       <h2>Login</h2>
       
-      {error && <div style={{ color: 'red', marginBottom: '10px' }} aria-live="polite">{error}</div>}
+      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       
       <div>
         <input
@@ -78,8 +66,13 @@ export default function LoginForm() {
       </div>
       
       <button type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
+        {loading ? <span>Loading...</span> : 'Login'}
       </button>
     </form>
   );
 }
+
+LoginForm.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+};
