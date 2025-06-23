@@ -18,18 +18,21 @@ body, .App {
   font-family: Arial, sans-serif;
 }
 
-button.theme-toggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button.theme-toggle:hover {
+button {
   background-color: var(--text);
   color: var(--bg);
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--bg);
+  color: var(--text);
 }
