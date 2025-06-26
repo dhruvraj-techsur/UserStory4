@@ -1,3 +1,4 @@
+// src/components/LoginForm.js
 import React, { useState } from 'react';
 
 export default function LoginForm() {
@@ -12,63 +13,73 @@ export default function LoginForm() {
     setError('');
 
     try {
-      // Simulate API call to backend
       const response = await fetch('/api/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password })
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Store token
         localStorage.setItem('authToken', data.token);
-        // Redirect to dashboard on success
+        // Redirect to dashboard
         window.location.href = '/dashboard';
+      } else if (response.status === 401) {
+        const body = await response.json();
+        setError(body.message || 'Invalid email or password');
       } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Login failed');
+        // handle other HTTP errors if needed
+        setError('Login failed. Please try again.');
       }
     } catch (err) {
-      setError('Network error. Please try again.');
+      // network errors, CORS issues, etc.
+      setError('Network error. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-      
+    <form onSubmit={handleSubmit} data-testid="login-form">
       <div>
+        <label htmlFor="email">Email</label>
         <input
+          id="email"
           type="email"
-          placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           required
-          disabled={loading}
+          data-testid="email-input"
         />
       </div>
-      
+
       <div>
+        <label htmlFor="password">Password</label>
         <input
+          id="password"
           type="password"
-          placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           required
-          disabled={loading}
+          data-testid="password-input"
         />
       </div>
-      
-      <button type="submit" disabled={loading}>
+
+      {error && (
+        <div role="alert" data-testid="error-message">
+          {error}
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        data-testid="login-button"
+      >
         {loading ? 'Logging in...' : 'Login'}
       </button>
     </form>
   );
-} 
+}
