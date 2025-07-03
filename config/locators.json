@@ -1,0 +1,22 @@
+{
+  "form": {
+    "by": "css selector",
+    "selector": "[data-testid='LoginForm-form-0']",
+    "value": "LoginForm-form-0"
+  },
+  "email": {
+    "by": "id",
+    "selector": "#email",
+    "value": "email"
+  },
+  "password": {
+    "by": "id",
+    "selector": "#password",
+    "value": "password"
+  },
+  "login": {
+    "by": "css selector",
+    "selector": "[data-testid='LoginForm-button-1']",
+    "value": "LoginForm-button-1"
+  }
+}

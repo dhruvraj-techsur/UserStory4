@@ -1,0 +1,94 @@
+{
+  "pipeline": {
+    "name": "automated-test-generation",
+    "version": "1.0.0",
+    "description": "End-to-end test generation pipeline for user stories"
+  },
+  "github": {
+    "mcp_server_url": "http://localhost:8000",
+    "auth_token": "${GITHUB_TOKEN}",
+    "default_branch": "main",
+    "clone_timeout": 300
+  },
+  "steps": {
+    "step0_fetch_code": {
+      "enabled": true,
+      "output_dir": "github_code",
+      "include_patterns": ["**/*.js", "**/*.ts", "**/*.py", "**/*.java", "**/*.md", "**/*.json", "**/*.yaml", "**/*.yml"],
+      "exclude_patterns": ["node_modules/**", ".git/**", "dist/**", "build/**", "__pycache__/**"]
+    },
+    "step1_parse_gherkin": {
+      "enabled": true,
+      "output_dir": "generated/gherkin",
+      "acceptance_criteria_sections": ["acceptance criteria", "acceptance criteria:", "acceptance criteria -", "## Acceptance Criteria"],
+      "gherkin_template": "templates/gherkin_scenario.j2"
+    },
+    "step2_generate_tests": {
+      "enabled": true,
+      "output_dir": "generated/tests",
+      "test_frameworks": {
+        "cucumber": {
+          "enabled": false,
+          "template": "templates/cucumber_feature.j2",
+          "step_definitions_template": "templates/cucumber_steps.j2"
+        },
+        "jest": {
+          "enabled": false,
+          "template": "templates/jest_test.j2"
+        },
+        "selenium": {
+          "enabled": true,
+          "template": "templates/selenium_test.j2"
+        }
+      }
+    },
+    "step3_setup_fixtures": {
+      "enabled": true,
+      "output_dir": "generated/fixtures",
+      "mock_server": {
+        "enabled": true,
+        "framework": "json-server",
+        "config_template": "templates/mock_server_config.j2"
+      },
+      "test_data": {
+        "enabled": true,
+        "factory_template": "templates/test_data_factory.j2"
+      }
+    },
+    "step4_update_config": {
+      "enabled": true,
+      "package_manager": "auto-detect",
+      "scripts": {
+        "test:generated": "jest generated/tests",
+        "test:cucumber": "cucumber-js generated/gherkin",
+        "test:smoke": "npm run test:generated -- --bail"
+      }
+    },
+    "step5_smoke_test": {
+      "enabled": true,
+      "timeout": 120,
+      "retries": 2,
+      "sandbox": {
+        "enabled": true,
+        "docker_image": "node:18-alpine",
+        "cleanup": true
+      }
+    },
+    "step6_feedback": {
+      "enabled": true,
+      "webhook_url": "${MCP_WEBHOOK_URL}",
+      "success_message": "✅ Tests generated and passed smoke test.",
+      "failure_message": "❌ Test generation failed: {error}"
+    }
+  },
+  "templates": {
+    "base_dir": "templates",
+    "engine": "jinja2",
+    "auto_reload": false
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "pipeline.log"
+  }
+} 
