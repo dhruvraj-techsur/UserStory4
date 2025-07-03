@@ -1,0 +1,91 @@
+2025-06-27 01:22:32,975 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 01:22:37,272 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 01:22:45,802 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:22:53,225 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:23:02,235 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:23:17,588 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:26:31,874 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 01:26:35,402 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 01:26:46,248 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:26:53,822 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:27:01,533 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 01:27:06,978 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 10:02:18,735 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 10:02:21,805 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 10:02:40,978 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 10:02:53,044 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 10:03:06,533 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 10:03:12,063 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:21:32,883 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 12:21:37,624 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 12:21:46,173 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:21:54,874 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:22:01,973 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:22:10,032 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:25:55,811 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 12:25:59,155 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 12:26:08,426 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:26:13,749 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:26:20,917 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:26:25,160 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:47:59,921 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 12:48:02,952 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 12:48:09,299 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:48:15,639 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:48:20,592 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:48:25,438 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:50:16,610 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 12:50:19,823 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 12:50:26,816 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:50:32,426 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:50:38,635 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 12:50:42,564 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:06:50,347 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 13:06:53,949 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 13:07:03,103 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:07:15,750 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:07:24,839 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:07:31,312 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:29:42,764 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 13:29:46,687 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 13:29:57,066 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:30:11,142 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:30:17,694 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:30:24,457 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:34:53,642 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 13:34:56,623 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 13:35:04,375 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:35:13,265 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:35:19,837 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 13:35:25,702 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 14:37:09,578 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 14:37:13,832 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 14:37:23,853 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 14:37:31,589 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 14:37:36,188 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 14:37:40,226 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 15:05:40,933 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-27 15:05:44,168 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-27 15:05:51,099 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 15:05:58,981 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 15:06:05,993 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-27 15:06:12,907 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 10:27:11,075 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-06-30 10:27:15,448 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-06-30 10:27:22,597 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 10:27:28,022 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 10:27:34,062 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-30 10:27:38,685 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:06:33,704 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-07-01 12:06:38,614 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-07-01 12:06:55,378 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:07:06,231 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:07:18,557 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:07:25,738 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:08:46,614 - step0_fetch_code - INFO - Step 0 already completed: github_code contains README.md and code files.
+2025-07-01 12:08:49,678 - step1_generate_gherkin - INFO - Generated Gherkin feature: generated/gherkin/_story_secure_login_api_integration.feature
+2025-07-01 12:09:00,776 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:09:11,160 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:09:23,450 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:09:37,783 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-01 12:37:44,195 - step0_fetch_code - ERROR - Failed to fetch repo via MCP: unhandled errors in a TaskGroup (1 sub-exception)

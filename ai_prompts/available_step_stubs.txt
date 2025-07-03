@@ -1,0 +1,5 @@
+@given('the user is on the login page')
+@when('the user views the login form')
+@then('the form should contain <field1>, <field2>, and <field3>')
+@when('the user enters <invalid_email> and <invalid_password> and clicks login')
+@then('error messages should be displayed for invalid inputs')

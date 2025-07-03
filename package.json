@@ -1,16 +1,22 @@
 {
-  "name": "react-dark-mode",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+  "type": "module",
+  "devDependencies": {
+    "@babel/cli": "^7.27.2",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "jscodeshift": "^17.3.0",
+    "yargs": "^17.7.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "dependencies": {
+    "@babel/parser": "^7.28.0",
+    "@babel/traverse": "^7.28.0",
+    "@cucumber/gherkin": "^32.1.2",
+    "@cucumber/messages": "^27.2.0",
+    "dotenv": "^16.5.0",
+    "gherkin-parse": "^1.0.12",
+    "glob": "^10.4.5",
+    "openai": "^5.7.0"
   }
 }
