@@ -1,1 +1,8 @@
-{}
+{
+    "login": {
+        "method": "POST",
+        "path": "/api/login",
+        "mockStatus": 200,
+        "mockResponse": {}
+        }
+}

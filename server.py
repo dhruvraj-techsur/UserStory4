@@ -51,24 +51,48 @@ def generate_gherkin(user_story: str) -> str:
     # Try to extract ticket ID from user_story (e.g., PROJ-123)
     ticket_match = re.search(r'([A-Z][A-Z0-9]+-\d+)', user_story)
     ticket_tag = f'@{ticket_match.group(1)}' if ticket_match else ''
+    tag_line = f' and {ticket_tag}' if ticket_tag else ''
     prompt = f"""
-Convert the following acceptance criteria or user story into a single Gherkin feature that:
-
-  1. Uses a **Background** section for any common setup.
-  2. **Groups similar test cases** into a **Scenario Outline** rather than separate Scenarios.
-  3. Provides an **Examples** table to parameterize inputs and expected results.
-  4. Adds a feature-level tag like `@AutoGen`{f' and {ticket_tag}' if ticket_tag else ''}.
-  5. Outputs only valid, runnable Gherkin text.
-
-Here's the user story / acceptance criteria:
+You are a Gherkin feature–writing assistant.  Given this user story / acceptance criteria:
 {user_story}
+
+Produce a single Gherkin `.feature` that meets these requirements:
+
+1. **Feature header**  
+   - Tag it with `@AutoGen`{tag_line}.  
+   - Include a one-sentence description under the `Feature:` line summarizing the goal.
+
+2. **Background**  
+   - If there is a common starting state (e.g. "the user is on the X page"), put it in a `Background:`.
+
+3. **Scenario Outlines**  
+   - Group similar cases into `Scenario Outline:` blocks with clear titles.  
+   - Use `<placeholder>` syntax for any dynamic values (fields, inputs, expected messages).
+
+4. **Examples tables**  
+   - Provide an `Examples:` table for each outline, listing every combination of placeholder values.
+
+5. **Step phrasing**  
+   - Start every step with **"the user ..."** (e.g. `When the user fills in ...`, `Then the user sees ...`).  
+   - For validations, use patterns like  
+     - `Then the user should see an error message next to the <field> field`  
+     - `Then the user should see the <field> input field`
+
+6. **Completeness**  
+   - Cover both positive (presence, valid input) and negative (missing/invalid input) flows.  
+   - Don't leave any loose ends or TODOs—only valid, runnable Gherkin.
+
+7. **Output**  
+   - Return _only_ the `.feature` text—no explanations or extra commentary.
+
+End your response with the complete Gherkin feature text.
 """
     try:
         client = openai.OpenAI()
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=1024,
+            max_tokens=2048,
             temperature=0.2,
         )
         gherkin_text = response.choices[0].message.content.strip()

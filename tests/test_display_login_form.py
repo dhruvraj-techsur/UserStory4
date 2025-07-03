@@ -5,66 +5,64 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
-from selenium import webdriver
-import json
-from pathlib import Path
+from config.locators import locators
+from config.endpoints import endpoints
+from tests.conftest import base_url
 
-# Load locators and endpoints
-locators_path = Path(__file__).parent.parent / 'config' / 'locators.json'
-with open(locators_path) as f:
-    locators = json.load(f)
-
-endpoints_path = Path(__file__).parent.parent / 'config' / 'endpoints.json'
-with open(endpoints_path) as f:
-    endpoints = json.load(f)
-
-# Bind feature file
-scenarios(r'gherkin/display_login_form.feature')
-
-@pytest.fixture
-def browser():
-    driver = webdriver.Chrome()
-    yield driver
-    driver.quit()
+scenarios(r'../gherkin/display_login_form.feature')
 
 @given('the user is on the login page')
-def user_on_login_page(browser):
-    browser.get(pytest.mock_base_url + endpoints['login']['path'])
+def user_on_login_page(browser, base_url):
+    browser.get(f"{base_url}{endpoints['login']['path']}")
 
-@when('the user views the login form')
-def user_views_login_form(browser):
-    WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, locators['root']['selector']))
-    )
+@when(parsers.parse('the user fills in the {email} email field with a valid email'))
+def user_fills_in_email_field(browser, email):
+    email_field = browser.find_element(By.ID, locators['email']['value'])
+    email_field.clear()
+    email_field.send_keys(email)
 
-@then(parsers.parse('the form should contain "{field}" input field'))
-def form_contains_field(browser, field):
-    locator_key = field.lower()
-    WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, locators[locator_key]['selector']))
-    )
+@when(parsers.parse('the user fills in the {password} password field with a valid password'))
+def user_fills_in_password_field(browser, password):
+    password_field = browser.find_element(By.ID, locators['password']['value'])
+    password_field.clear()
+    password_field.send_keys(password)
 
-@when(parsers.parse('the user enters "{input}" in the "{field}" field'))
-def user_enters_input(browser, input, field):
-    locator_key = field.lower()
-    input_element = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, locators[locator_key]['selector']))
-    )
-    input_element.clear()
-    input_element.send_keys(input)
-
-@when('clicks on the Login button')
+@when(parsers.parse('the user clicks on the login button'))
 def user_clicks_login_button(browser):
-    login_button = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, locators['LoginForm-button-0']['selector']))
-    )
+    login_button = browser.find_element(By.CSS_SELECTOR, locators['login']['selector'])
     login_button.click()
 
-@then(parsers.parse('an error message should be displayed for "{field}"'))
-def error_message_displayed(browser, field):
-    locator_key = field.lower()
-    error_locator = (By.CSS_SELECTOR, f"#{locator_key}-error")
-    WebDriverWait(browser, 10).until(
-        EC.visibility_of_element_located(error_locator)
-    )
+@then('the user should be logged in')
+def user_should_be_logged_in(browser):
+    WebDriverWait(browser, 10).until(EC.url_contains("/dashboard"))
+    assert "/dashboard" in browser.current_url
+
+@when(parsers.parse('the user fills in the {email} email field with an invalid email'))
+def user_fills_in_invalid_email_field(browser, email):
+    email_field = browser.find_element(By.ID, locators['email']['value'])
+    email_field.clear()
+    email_field.send_keys(email)
+
+@when(parsers.parse('the user fills in the {password} password field with an invalid password'))
+def user_fills_in_invalid_password_field(browser, password):
+    password_field = browser.find_element(By.ID, locators['password']['value'])
+    password_field.clear()
+    password_field.send_keys(password)
+
+@then(parsers.parse('the user should see an error message next to the {field} field'))
+def user_sees_error_message(browser, field):
+    if field == "Email":
+        error_locator = (By.CSS_SELECTOR, "[data-testid='email-error']")
+    elif field == "Password":
+        error_locator = (By.CSS_SELECTOR, "[data-testid='password-error']")
+    error_message = WebDriverWait(browser, 10).until(EC.visibility_of_element_located(error_locator))
+    assert error_message.is_displayed()
+
+@when(parsers.parse('the user leaves the {field} field empty'))
+def user_leaves_field_empty(browser, field):
+    if field == "Email":
+        email_field = browser.find_element(By.ID, locators['email']['value'])
+        email_field.clear()
+    elif field == "Password":
+        password_field = browser.find_element(By.ID, locators['password']['value'])
+        password_field.clear()

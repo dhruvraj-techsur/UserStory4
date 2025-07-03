@@ -1,0 +1,12 @@
+venv/
+.venv/
+.git/
+.gitignore
+.cursorignore
+.cursorrules
+.cursorconfig
+.cursorconfig.json
+.cursorconfig.json
+node_modules/
+.vscode/
+.vscode/
